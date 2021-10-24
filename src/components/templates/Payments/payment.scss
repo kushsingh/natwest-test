@@ -1,0 +1,23 @@
+.table-header {
+  padding: 1rem 1rem 0.2rem;
+  align-items: center;
+
+  .justify-end {
+    display: flex;
+    justify-content: flex-end;
+
+    select {
+      width: 200px;
+    }
+  }
+}
+
+.data-table {
+  padding: 0 1rem 1rem;
+}
+
+.lazy-loading {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem;
+}
