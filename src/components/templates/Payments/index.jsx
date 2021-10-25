@@ -19,8 +19,12 @@ import {
 } from "../../../constants";
 
 import "./payment.scss";
+import { Context } from "../../../Context/PaymentContext";
 
-const PaymentList = ({ payments, loadMore, handleStatusChange }) => {
+const PaymentList = () => {
+  const { paymentState, loadMore, handleStatusChange, loadData } =
+    React.useContext(Context);
+
   const columns = [
     { key: "paymentAmount", label: PAYMENT_AMOUNT },
     { key: "paymentCurrency", label: PAYMENT_CURRENCY },
@@ -28,7 +32,7 @@ const PaymentList = ({ payments, loadMore, handleStatusChange }) => {
     { key: "paymentStatus", label: PAYMENT_STATUS },
     { key: "paymentDate", label: PAYMENT_DATE },
   ];
-
+  
   return (
     <>
       <div className="row table-header">
@@ -49,26 +53,20 @@ const PaymentList = ({ payments, loadMore, handleStatusChange }) => {
       </div>
 
       <div className="data-table">
-        <Table columns={columns} data={payments.results} />
+        <Table columns={columns} data={paymentState.results} />
       </div>
 
       <div className="lazy-loading">
         <Button
           className="btn btn-secondary btn-sm"
-          disabled={!payments.metaDatal.hasMoreElements}
-          onClick={loadMore}
+          disabled={!paymentState.metaDatal.hasMoreElements}
+          onClick={loadData}
         >
-        {PAYMENT_LOAD_MORE}
+          {PAYMENT_LOAD_MORE}
         </Button>
       </div>
     </>
   );
-};
-
-PaymentList.propTypes = {
-  payments: PropTypes.object,
-  loadMore: PropTypes.func,
-  handleStatusChange: PropTypes.func,
 };
 
 export default PaymentList;
