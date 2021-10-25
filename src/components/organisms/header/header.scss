@@ -1,0 +1,18 @@
+@import "./../../../variables.scss";
+
+.navbar {
+  border-bottom: $border-color;
+  box-shadow: $small-shadow;
+}
+
+.page-title {
+  background: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .logo {
+    font: 600 1.5rem/2rem "Open Sans";
+    color: $primary-call-action;
+  }
+}
