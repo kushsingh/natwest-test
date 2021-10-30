@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NAME } from "../../../constants"
+import { NAME } from "../../../constants";
 
 import "./header.scss";
 

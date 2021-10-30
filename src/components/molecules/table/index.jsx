@@ -19,7 +19,7 @@ const Table = ({ columns, data }) => {
                 <td key={`row-column-${item.key}`}>{dataItem[item.key]}</td>
               ))}
             </tr>
-          );
+          );                                                                            
         })}
       </tbody>
     </table>
