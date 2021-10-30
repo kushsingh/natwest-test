@@ -22,7 +22,7 @@ import "./payment.scss";
 import { Context } from "../../../Context/PaymentContext";
 
 const PaymentList = () => {
-  const { paymentState, loadMore, handleStatusChange, loadData } =
+  const { paymentState, handleStatusChange, loadData } =
     React.useContext(Context);
 
   const columns = [
@@ -34,12 +34,17 @@ const PaymentList = () => {
   ];
   
   return (
+    // Use React.Fragment, that help to optimize performace
+    // Fragments let you group a list of children without adding extra nodes to the DOM.
     <>
       <div className="row table-header">
         <div className="col-6 pr-2">
           <Heading className="page-heading">{PAYMENT_PAGE_HEADING}</Heading>
         </div>
         <div className="col-6 pl-2 justify-end">
+          {/* Button is stateless componenet
+            * For stateless component don't have any state at all, which means you can't use this.setState inside this components  
+            */}
           <Select
             options={[
               { label: STATUS_APPROVED, value: "A" },
@@ -53,10 +58,14 @@ const PaymentList = () => {
       </div>
 
       <div className="data-table">
+        {/* Table is stateless componenet
+          * same component, use more places and just need to pass "columns" for thead and  "data" for tbody
+        */}
         <Table columns={columns} data={paymentState.results} />
       </div>
 
       <div className="lazy-loading">
+         {/* Button is stateless componenet*/}
         <Button
           className="btn btn-secondary btn-sm"
           disabled={!paymentState.metaDatal.hasMoreElements}

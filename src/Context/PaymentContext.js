@@ -13,13 +13,15 @@ export const Context = React.createContext(initialState);
 const PaymentContext = (props) => {
   const [paymentState, paymentDispatch] = useState(initialState);
 
+  //console.log("paymentStatus has been updated", [...paymentState.results])
+
   // This method will save payment list according to salected filter
   const filterDataByStatus = (status, items) => {
     if (!status) return items;
     return items.filter((data) => data.paymentStatus === status);
   };
 
-  // This method will call on payment load and click on lodmore button
+  // This method will call on payment load and click on "loadmore" button
   const loadData = () => {
     getPaymentList(
       `${
@@ -29,7 +31,7 @@ const PaymentContext = (props) => {
       }`
     )
       .then((response) => response.json())
-      .then((json) => {
+      .then((json) => new Promise((resolve, reject) => {
         const oldResults = [...paymentState.results, ...json.results];
         
         /** Here paymentDispatch will updated on page load and load more payment
@@ -42,7 +44,10 @@ const PaymentContext = (props) => {
           results: filterDataByStatus(paymentState.status, [...oldResults]), 
           resultsBkp: oldResults,
         });
-      });
+        
+        //console.log("paymentStatus has not updated", [...paymentState.results])
+      }))
+      .catch(error => console.log(error.message));
   };
 
   // This method will call on change of filter payment list select box
