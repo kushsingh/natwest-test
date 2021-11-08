@@ -4,7 +4,8 @@
  *  */
 
 import React, { useState } from "react";
-import { getPaymentList } from "../services/api.service";
+import { FetchWrapper } from "../services/api.service";
+import { API_URLS_PAYMENTLIST } from "../services/constant/constants";
 
 const initialState = { results: [], metaDatal: {}, resultsBkp: [], status: "" };
 // Creating global context
@@ -23,8 +24,8 @@ const PaymentContext = (props) => {
 
   // This method will call on payment load and click on "loadmore" button
   const loadData = () => {
-    getPaymentList(
-      `${
+    FetchWrapper.get(
+      `${API_URLS_PAYMENTLIST}${
         paymentState.metaDatal.nextPageIndex
           ? `?nextPageIndex=${paymentState.metaDatal.nextPageIndex}`
           : ""
@@ -38,7 +39,7 @@ const PaymentContext = (props) => {
          *  metaDatal - based on metaDatal, the "Load More" button enable and disable 
          *  results - updaing filter status and updated oldresults
          *  resultsBkp - creating backup original response 
-         *  */
+         **/
         paymentDispatch({
           metaDatal: json.metaDatal,
           results: filterDataByStatus(paymentState.status, [...oldResults]), 
